@@ -14,7 +14,7 @@ try {
 }
 
 // 参照はSELECT文!
-$sql = 'SELECT * FROM todo_table';
+$sql = 'SELECT * FROM Daylight';
 $stmt = $pdo->prepare($sql);
 $status = $stmt->execute();
 // $statusにSQLの実行結果が入る(取得したデータではない点に注意)
@@ -27,12 +27,17 @@ if ($status == false) {
   $output = "";
   foreach ($result as $record) {
     $output .= "<tr>";
-    $output .= "<td>{$record["deadline"]}</td>";
-    $output .= "<td>{$record["todo"]}</td>";
+    $output .= "<td>{$record["room"]}</td>";
+    $output .= "<td>{$record["win"]}</td>";
+    $output .= "<td>{$record["Sflo"]}</td>";
+    $output .= "<td>{$record["Swin"]}</td>";
+    $output .= "<td>{$record["H"]}</td>";
+    $output .= "<td>{$record["D"]}</td>";
+    $output .= "<td>{$record["P"]}</td>";
+    $output .= "<td>{$record["Result"]}</td>";
     $output .= "</tr>";
   }
 }
-
 
 ?>
 
@@ -42,18 +47,41 @@ if ($status == false) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DB連携型todoリスト（一覧画面）</title>
+  <title>Daylighting calculation</title>
 </head>
+<style>
+  body {
+    background: #efefef;
+  }
+
+  .all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  fieldset {
+    border: none;
+  }
+</style>
 
 <body>
   <fieldset>
-    <legend>DB連携型todoリスト（一覧画面）</legend>
-    <a href="todo_input.php">入力画面</a>
+    <legend>Daylighting calculation</legend>
+    <a href="todo_input.php">窓の入力画面へ</a>
     <table>
       <thead>
         <tr>
-          <th>deadline</th>
-          <th>todo</th>
+          <th>部屋の名前</th>
+          <th>窓の位置</th>
+          <th>床面積(㎡)</th>
+          <th>窓面積(㎡)</th>
+          <th>垂直距離 H(mm)</th>
+          <th>水平距離 D(mm)</th>
+          <th>床面積に対する有効採光面積の割合</th>
+          <th>判定(1/7以上を満たしているか)</th>
         </tr>
       </thead>
       <tbody>
